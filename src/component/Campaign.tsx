@@ -6,6 +6,8 @@ import edit from "../images/Group.png";
 import deleteIcon from "../images/material-symbols_delete-outline-rounded.png";
 import backArrow from "../images/material-symbols_arrow-back-ios-rounded.png";
 import nextArrow from "../images/material-symbols_arrow-back-ios-rounded (1).png";
+import { useDispatch } from "react-redux";
+import { formActions } from "../store";
 
 
 // Define the structure of a campaign object
@@ -29,6 +31,12 @@ const Campaign: React.FC = () => {
 
   const columnArray = ["S/N", "Campaign Name", "Start Date", "Status", "Action"];
   const arr = [1, 2, 3, 4, 5, 6, 7];
+
+  const dispatch = useDispatch();
+  const handleView = (idx:number)=>{
+    dispatch(formActions.handleFillData(campaignList[idx]));
+    console.log(campaignList[idx])
+  }
 
   useEffect(() => {
     
@@ -80,7 +88,7 @@ const Campaign: React.FC = () => {
                 <div className="w-[20%] flex items-center gap-4">
                   <img 
                       className="hover:cursor-pointer"
-                      src={eye} onClick={()=>{}} 
+                      src={eye} onClick={()=> handleView(idx)} 
                       alt="eye icon" 
                   />
                   <img className="hover:cursor-pointer" src={edit} alt="edit icon" />

@@ -3,6 +3,8 @@ import X from "../images/iconoir_cancel.png"
 import arrowd from "../images/Vector (2).png"
 
 import back from "../images/Vector (7).png"
+import { useSelector, useDispatch } from "react-redux"
+import { formActions } from "../store"
 
 const NewCampaignInfo:React.FC = ()=>{
 
@@ -11,29 +13,48 @@ const NewCampaignInfo:React.FC = ()=>{
     // The data I wants for this palce starts here
 
     interface formData{
-        campaignname: string,
-        date:string,
-        description: string,
-        startdate: string,
-        enddate: string,
-        dailydigest: boolean,
-        keyword: string[],
-        frequency: string,
-        id: string
-        
+        campaignDescription: string,
+        campaignName: string,
+        campaignStatus: string,
+        dailyDigest:string,
+        digestCampaign: string,
+        endDate: string,
+        id: string,
+        linkedKeywords: string[],
+        startDate: string,
+        show: boolean
+    } 
+
+    const data = useSelector((state:any)=>state.formData)
+    const dispatch = useDispatch()
+    const handleBack = ()=>{
+        dispatch(formActions.handleHide())
     }
 
+
     const [campaignData,setCampaignData]= React.useState<formData>({
-        campaignname: "MTN",
-        date: "",
-        description: "",
-        startdate: "22/04/2022",
-        enddate: "22/04/2022",
-        dailydigest: false,
-        keyword: ["banks", "banks"],
-        frequency: "Monthly",
-        id: ""
+        campaignDescription: "",
+        campaignName: "",
+        campaignStatus: "",
+        dailyDigest: "",
+        digestCampaign: "",
+        endDate: "",
+        id: "",
+        linkedKeywords: [],
+        startDate: "",
+        show:  false
     })
+
+    React.useEffect(()=>{
+        setCampaignData(data)
+    },[])
+
+    const[edit,setEdit] = React.useState<boolean>(false);
+
+    const handleEdit = ()=>{
+        
+        setEdit(prev=>!prev)
+    }
 
     const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
         const{name, value} = e.target
@@ -73,7 +94,7 @@ const NewCampaignInfo:React.FC = ()=>{
     const handleDigest = ()=>{
         setCampaignData((prev:formData)=>({
             ...prev,
-            dailydigest: !prev.dailydigest
+            digestCampaign:  prev.digestCampaign === "Yes" ? "No" : "Yes"
         }))
     
     }
@@ -89,16 +110,12 @@ const NewCampaignInfo:React.FC = ()=>{
 
     // end range fo the data
 
-    const[edit,setEdit] = React.useState<boolean>(false);
-
-    const handleEdit = ()=>{
-        setEdit(prev=>!prev)
-    }
+   
 
     return (
         <div className="w-full">
 
-            <button className=" flex items-center justify-center hover:cursor-pointer bg-none border-none">
+            <button onClick={handleBack} className=" flex items-center justify-center hover:cursor-pointer bg-none border-none">
                 <img src={back} alt="back arrow" />
                 <span className="text-[#333333] text-base font-normal">Back</span>
             </button>
@@ -130,12 +147,12 @@ const NewCampaignInfo:React.FC = ()=>{
                                     name= "campaignname"
                                     placeholder="eg. The future is now"
                                     className="border rounded-md w-full p-2 mt-1  text-form text-xs outline-none"
-                                    value= {campaignData.campaignname}
+                                    value= {campaignData.campaignName}
                                     onChange={(e)=>{handleChange(e)}}
 
                                 />
                             ): (
-                                <p className="border w-full rounded-md p-2 mt-1 text-form text-xs">{campaignData.campaignname}</p>
+                                <p className="border w-full rounded-md p-2 mt-1 text-form text-xs">{campaignData.campaignName}</p>
                             )
                         }
 
@@ -156,13 +173,13 @@ const NewCampaignInfo:React.FC = ()=>{
                                     name= "startdate"
                                     placeholder="dd/mm/yyyy"
                                     className="border rounded-md w-full p-2 mt-1 text-form text-xs outline-none"
-                                    value= {campaignData.startdate}
+                                    value= {campaignData.startDate}
                                     onChange={(e)=>{handleChange(e)}}
     
                                 />
 
                                 ):(
-                                    <p className="border rounded-md w-full p-2 mt-1 text-form text-xs">{campaignData.startdate}</p>
+                                    <p className="border rounded-md w-full p-2 mt-1 text-form text-xs">{campaignData.startDate}</p>
                                 )
                             }
 
@@ -180,12 +197,12 @@ const NewCampaignInfo:React.FC = ()=>{
                                 name= "enddate"
                                 placeholder="dd/mm/yyyy"
                                 className="border rounded-md w-full p-2 mt-1  text-form text-xs outline-none"
-                                value= {campaignData.enddate}
+                                value= {campaignData.endDate}
                                 onChange={(e)=>{handleChange(e)}}
 
                             />
                                 ):(
-                                    <p  className="border rounded-md w-full p-2 mt-1 text-form text-xs">{campaignData.enddate}</p>
+                                    <p  className="border rounded-md w-full p-2 mt-1 text-form text-xs">{campaignData.endDate}</p>
                                 )
                              }
 
@@ -224,7 +241,7 @@ const NewCampaignInfo:React.FC = ()=>{
                                     <div className="flex items-center gap-2">  
                                         
                                         {
-                                            campaignData.keyword.map((items, index)=>(
+                                            campaignData.linkedKeywords.map((items, index)=>(
                                                 <div key={index} className="bg-logobi rounded-md px-2.5 py-1 w-auto flex items-center hover:cursor-pointer gap-1">
                                                     <span className="text-xs text-[#FFFFFF]">{items}</span>
                                                     <img className="w-[12px] h-[12px] " src={X} alt="x icon" />
@@ -253,19 +270,19 @@ const NewCampaignInfo:React.FC = ()=>{
                                 <div className="w-full flex justify-between  items-center border rounded-md mt-4">
                                     <p className="text-help text-sm">Want to receive daily digest about the campaign?</p>
 
-                                    <div className={`bg-[#6E0080] rounded-xl w-10 flex ${ campaignData.dailydigest? 'justify-end':'justify-start'} `}>
+                                    <div className={`bg-[#6E0080] rounded-xl w-10 flex ${ campaignData.digestCampaign === "yes"? 'justify-end':'justify-start'} `}>
                                         <input 
                                         type="button"
                                         name = "dailydigest"
                                         onClick={handleDigest}
-                                        value = { campaignData.dailydigest? "Yes" : "No"}
+                                        value = {campaignData.dailyDigest}
                                         className="bg-sidebar hover:cursor-pointer rounded-full text-sidebar w-[23px] h-[23px] text-[7px] border-none"
                                         />
                                     </div>
                                </div>
                              ):(
                                 <div className="flex border rounded-md items-center w-full justify-between p-2">
-                                    <span className="text-base font-[500] text-[#999999]">{campaignData.dailydigest? "Yes" : "No"}</span>
+                                    <span className="text-base font-[500] text-[#999999]">{campaignData.digestCampaign? "Yes" : "No"}</span>
                                     <img src={arrowd} alt="arrowdown" />
 
                                 </div>
@@ -291,7 +308,7 @@ const NewCampaignInfo:React.FC = ()=>{
     
                                     <select 
                                         className="w-full border-none text-xs outline-none"
-                                        value= {campaignData.frequency}
+                                        value= {campaignData.dailyDigest}
                                         onChange={(e)=>{handleSelect(e)}}
         
                                         name="frequency"
@@ -309,7 +326,7 @@ const NewCampaignInfo:React.FC = ()=>{
 
                                 ):(
                                     <div className="flex border rounded-md items-center w-full justify-between p-2">
-                                        <span className="text-base font-[500] text-[#999999]">{campaignData.frequency}</span>
+                                        <span className="text-base font-[500] text-[#999999]">{campaignData.dailyDigest}</span>
                                         <img src={arrowd} alt="arrowdown" />
 
                                     </div>
