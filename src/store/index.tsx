@@ -9,8 +9,10 @@ interface formData{
     endDate: string,
     id: string,
     linkedKeywords: string[],
-    startDate: string
+    startDate: string,
+    show: boolean
 }
+
 
 const initialState:formData ={
     campaignDescription: "",
@@ -21,7 +23,8 @@ const initialState:formData ={
     endDate: "",
     id: "",
     linkedKeywords: [],
-    startDate: ""
+    startDate: "",
+    show: false
 }
 
 const campaignDataSlice = createSlice({
@@ -38,8 +41,10 @@ const campaignDataSlice = createSlice({
             state.id = action.payload.id
             state.linkedKeywords = action.payload.linkedKeywords
             state.endDate = action.payload.endDate
-
-            console.log(state)
+            state.show = !state.show
+        },
+        handleHide(state){
+            state.show = !state.show
         }
     }
 })

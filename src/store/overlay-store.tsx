@@ -3,7 +3,7 @@ import {createSlice } from "@reduxjs/toolkit"
 interface props{
     successCreate: boolean,
     sucessPost: boolean,
-    successDelete: boolean
+    successDelete: boolean,
 }
 
 const initialState:props ={

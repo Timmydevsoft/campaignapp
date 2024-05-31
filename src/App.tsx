@@ -8,6 +8,7 @@ import Sidebar from "./component/Sidebar";
 import SuccessfulDelete from "./component/SuccessFullDelete";
 import SuccessfulCreation from "./component/SuccessfulCreation";
 import SuccefullStop from "./component/SuccessfulStop";
+import NewCampaignInfo from "./component/NewCampaignInfo";
 
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -17,6 +18,7 @@ export default function App() {
   const successCreate = useSelector((state:any)=>state.overlay.successCreate)
   const successPost = useSelector((state:any)=>state.overlay.successPost)
   const successDelete = useSelector((state:any)=>state.overlay.successDelete)
+  const showCampaign = useSelector((state:any)=>state.formData.show)
 
   return (
     <div className={`flex w-full bg-bacground h-[100vh]`}> 
@@ -33,7 +35,7 @@ export default function App() {
           <Routes>
             <Route path="/" element= {<Overview/>}/>
             <Route path="/new-campaign" element= {<NewCampaign/>}/>
-            <Route path="/campaign" element= {<Campaign/>}/>
+            <Route path="/campaign" element= {showCampaign?<NewCampaignInfo/>:<Campaign/>}/>
             
 
           </Routes>
