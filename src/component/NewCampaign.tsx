@@ -1,7 +1,6 @@
 import React from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { formActions } from "../store";
 import { overlayActions } from "../store/overlay-store";
 
 const NewCampaign: React.FC = () => {
@@ -99,7 +98,6 @@ const NewCampaign: React.FC = () => {
       
       console.log(response.status);
       dispatch(overlayActions.renderSuccess());
-      dispatch(formActions.handleFillData(data)); // Dispatch if necessary
     } catch (error) {
       console.error("Error creating campaign:", error);
     }
