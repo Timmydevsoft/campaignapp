@@ -16,8 +16,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 export default function App() {
 
   const successCreate = useSelector((state:any)=>state.overlay.successCreate)
-  const successPost = useSelector((state:any)=>state.overlay.successPost)
   const successDelete = useSelector((state:any)=>state.overlay.successDelete)
+  const confirmStop = useSelector((state:any)=>state.overlay.confirmDelete)
   const showCampaign = useSelector((state:any)=>state.formData.show)
 
   return (
@@ -44,7 +44,7 @@ export default function App() {
             successCreate? (<SuccessfulCreation/>): null
           }
           {
-            successPost? (<SuccefullStop/>):null
+            confirmStop? (<SuccefullStop/>):null
           }
 
           {

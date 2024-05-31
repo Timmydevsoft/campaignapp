@@ -31,7 +31,7 @@ const NewCampaign: React.FC = () => {
   const [keywords, setKeywords] = React.useState<Keyword[]>([]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter") {cdc
       setKeywords([...keywords, { keyword }]);
       setKeyword("");
     }

@@ -34,6 +34,7 @@ const campaignDataSlice = createSlice({
         handleFillData(state,action){
             state.campaignName = action.payload.campaignName
             state.startDate = action.payload.startDate
+            state.campaignStatus = action.payload.campaignStatus
             state.dailyDigest = action.payload.dailyDigest
             state.campaignDescription = action.payload.campaignDescription
             state.endDate= action.payload.endDate 

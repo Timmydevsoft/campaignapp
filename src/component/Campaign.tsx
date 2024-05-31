@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import AllCampaignHeader from "./AllCampaignHeader";
@@ -9,8 +10,6 @@ import nextArrow from "../images/material-symbols_arrow-back-ios-rounded (1).png
 import { useDispatch } from "react-redux";
 import { formActions } from "../store";
 
-
-// Define the structure of a campaign object
 interface Campaign {
   id: number;
   campaignName: string;
@@ -28,25 +27,25 @@ const Campaign: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-
   const columnArray = ["S/N", "Campaign Name", "Start Date", "Status", "Action"];
   const arr = [1, 2, 3, 4, 5, 6, 7];
 
   const dispatch = useDispatch();
-  const handleView = (idx:number)=>{
+
+  const handleView = (idx: number) => {
     dispatch(formActions.handleFillData(campaignList[idx]));
-    console.log(campaignList[idx])
-  }
+    console.log(campaignList[idx]);
+  };
 
   useEffect(() => {
-    
-    axios.get("https://infinion-test-int-test.azurewebsites.net/api/campaign")
+    axios
+      .get("https://infinion-test-int-test.azurewebsites.net/api/campaign")
       .then((response) => {
         setCampaignList(response.data);
         setLoading(false);
       })
       .catch((error) => {
-        setError(error);
+        setError(error.message);
         setLoading(false);
       });
   }, []);
@@ -59,9 +58,18 @@ const Campaign: React.FC = () => {
     return <div>{error}</div>;
   }
 
- 
-
-  
+  const handleDelete = (id: number) => {
+    const url = `https://infinion-test-int-test.azurewebsites.net/api/campaign/${id}`;
+    axios
+      .delete(url)
+      .then((response) => {
+        setCampaignList(campaignList.filter((campaign) => campaign.id !== id));
+        console.log(response)
+      })
+      .catch((error) => {
+        console.error("There was an error deleting the campaign!", error);
+      });
+  };
 
   return (
     <div className="">
@@ -81,18 +89,26 @@ const Campaign: React.FC = () => {
               <div key={campaign.id} className="w-full flex items-center py-1.5 px-2 justify-between border-b">
                 <p className="w-[20%] text-base text-help font-normal">{idx + 1}.</p>
                 <p className="w-[20%] text-base text-help font-normal">{campaign.campaignName}</p>
-                <p className="w-[20%] text-base text-help font-normal">{new Date(campaign.startDate).toLocaleDateString()}</p>
+                <p className="w-[20%] text-base text-help font-normal">
+                  {new Date(campaign.startDate).toLocaleDateString()}
+                </p>
                 <p className={`${campaign.campaignStatus === "Active" ? 'text-[#009918]' : 'text-[#990000]'} w-[20%] text-sm font-bold`}>
                   {campaign.campaignStatus.toUpperCase()}
                 </p>
                 <div className="w-[20%] flex items-center gap-4">
-                  <img 
-                      className="hover:cursor-pointer"
-                      src={eye} onClick={()=> handleView(idx)} 
-                      alt="eye icon" 
+                  <img
+                    className="hover:cursor-pointer"
+                    src={eye}
+                    onClick={() => handleView(idx)}
+                    alt="eye icon"
+                  />
+                  <img
+                    onClick={() => handleDelete(campaign.id)}
+                    className="hover:cursor-pointer"
+                    src={deleteIcon}
+                    alt="delete icon"
                   />
                   <img className="hover:cursor-pointer" src={edit} alt="edit icon" />
-                  <img className="hover:cursor-pointer" src={deleteIcon} alt="delete icon" />
                 </div>
               </div>
             ))}

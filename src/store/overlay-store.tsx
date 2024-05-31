@@ -3,13 +3,15 @@ import {createSlice } from "@reduxjs/toolkit"
 interface props{
     successCreate: boolean,
     sucessPost: boolean,
+    confirmDelete: boolean,
     successDelete: boolean,
 }
 
 const initialState:props ={
     successCreate: false,
     sucessPost: false,
-    successDelete: false
+    successDelete: false,
+    confirmDelete: false
 }
  const overlaySlice = createSlice({
     name:"overlay",
@@ -23,6 +25,9 @@ const initialState:props ={
         },
         renderSuccessDelete(state){
             state.successDelete= !state.successDelete
+        },
+        renderConfirmDelete(state){
+            state.confirmDelete = !state.confirmDelete
         }
 
      }
