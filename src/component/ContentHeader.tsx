@@ -6,7 +6,7 @@ import downarrow from "../images/Vector (2).png"
 
 const ContentHeader:React.FC = ()=>{
     return(
-        <div className="w-full border-b pl-12 pr-10 py-2.5 flex items-center justify-between">
+        <div className="w-full border-b mb-4 pl-12 pr-10 py-2.5 flex items-center justify-between">
 
             {/*search form */}
 

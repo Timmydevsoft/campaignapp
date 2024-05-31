@@ -59,7 +59,6 @@ const AllCampaignHeader:React.FC = ()=>{
                         <select 
                             className="w-full outline-none border-none text-overview text-sm"
                                 id="favColor"
-                                value= "date"
                                 // onChange={click}
                                 name="date filtering"
                         >
