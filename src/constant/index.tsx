@@ -4,25 +4,30 @@ import mktintelligentd from "../images/fluent-mdl2_insights.png"
 import settingd from "../images/ep_setting.png"
 interface propsType{
     name: string;
-    icon: string
+    icon: string;
+    link: string
 }
 
 export const sidenavItems: propsType[] = [
    {
     name: "Overview",
+    link: "/",
     icon: overviewd
    },
 
    {
     name: "Campaign",
+    link: '/campaign',
     icon: campg
    },
    {
     name: "Marketing intelligence",
+    link: '/',
     icon: mktintelligentd
    },
    {
     name: "Account Settings",
+    link: '/',
     icon: settingd
    }
 

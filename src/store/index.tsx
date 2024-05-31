@@ -1,27 +1,27 @@
 import {createSlice } from "@reduxjs/toolkit"
 
 interface formData{
-    campaignname: string,
-    date:string,
-    description: string,
-    startdate: string,
-    enddate: string,
-    dailydigest: boolean,
-    keyword: string,
-    frequency: string
-    
+    campaignDescription: string,
+    campaignName: string,
+    campaignStatus: string,
+    dailyDigest:string,
+    digestCampaign: string,
+    endDate: string,
+    id: string,
+    linkedKeywords: string[],
+    startDate: string
 }
 
 const initialState:formData ={
-
-    campaignname: "",
-    date: "",
-    description: "",
-    startdate: "",
-    enddate: "",
-    dailydigest: false,
-     keyword: "",
-     frequency: ""
+    campaignDescription: "",
+    campaignName: "",
+    campaignStatus: "",
+    dailyDigest: "",
+    digestCampaign: "",
+    endDate: "",
+    id: "",
+    linkedKeywords: [],
+    startDate: ""
 }
 
 const campaignDataSlice = createSlice({
@@ -29,14 +29,17 @@ const campaignDataSlice = createSlice({
     initialState,
     reducers:{
         handleFillData(state,action){
-            state.campaignname = action.payload.campaigname
-            state.date = action.payload.date
-            state.dailydigest = action.payload.dailydigest
-            state.description = action.payload.description
-            state.enddate = action.payload.enddate 
-            state.frequency = action.payload.frequency
-            state.keyword = action.payload.keyword
-            state.startdate = action.payload.startdate
+            state.campaignName = action.payload.campaignName
+            state.startDate = action.payload.startDate
+            state.dailyDigest = action.payload.dailyDigest
+            state.campaignDescription = action.payload.campaignDescription
+            state.endDate= action.payload.endDate 
+            state.digestCampaign = action.payload.digestCampaign
+            state.id = action.payload.id
+            state.linkedKeywords = action.payload.linkedKeywords
+            state.endDate = action.payload.endDate
+
+            console.log(state)
         }
     }
 })

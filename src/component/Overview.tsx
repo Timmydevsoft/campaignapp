@@ -2,6 +2,7 @@ import React from "react"
 import OverviewHeader from "./OverviewHeader"
 import group from "../images/Clip path group.png"
 import add from "../images/material-symbols_add.png"
+import { Link } from "react-router-dom"
 const Overview:React.FC = ()=>{
     return(
         <div className="h-full flex flex-col">
@@ -16,7 +17,7 @@ const Overview:React.FC = ()=>{
                    <div className="flex justify-center">
                        <button className="flex max-w-fit items-center justify-center gap-2 px-4 py-1.5 border-none rounded-md bg-logobi ">
                             <img src={add} alt="add icon" />
-                            <span className="text-base text-bacground">New Campaign</span>
+                            <Link to="/new-campaign" className="text-base text-bacground">New Campaign</Link>
                         </button>
 
                    </div>
