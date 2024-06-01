@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { overlayActions } from "../store/overlay-store";
+import "../index.css"
 
 const NewCampaign: React.FC = () => {
   interface FormData {
@@ -31,6 +32,7 @@ const NewCampaign: React.FC = () => {
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
+      e.preventDefault()
       setKeywords([...keywords, { keyword }]);
       setKeyword("");
     }
@@ -105,13 +107,13 @@ const NewCampaign: React.FC = () => {
 
   return (
     <div className="w-full">
-      <h2 className="text-lg font-[600] text-overview stacking-wide">
+      <h2 className="text-lg worksans font-bold text-overview">
         Create New Campaign
       </h2>
       <div>
         <form className="w-full pt-6" onSubmit={handleSubmit}>
           <div className="w-full mb-2">
-            <label className="text-help text-xm" htmlFor="campaignName">
+            <label className="text-help text-sm font-medium" htmlFor="campaignName">
               Campaign Name <span className={`text-red`}>*</span> :
             </label>
             <br />
@@ -119,21 +121,21 @@ const NewCampaign: React.FC = () => {
               type="text"
               name="campaignName"
               placeholder="eg. The future is now"
-              className="border rounded-md w-full p-2 mt-1 text-form text-base outline-none"
+              className="border rounded-md w-full p-2 mt-1 text-base outline-none"
               value={newCampaignData.campaignName}
               onChange={handleChange}
             />
           </div>
 
           <div className="w-full mb-2">
-            <label className="text-help text-sm" htmlFor="campaignDescription">
+            <label className="text-help text-sm font-medium" htmlFor="campaignDescription">
               Campaign Description
             </label>
             <br />
             <textarea
               value={newCampaignData.campaignDescription}
               onChange={handleTextArea}
-              className="border rounded-md w-full p-2.5 mt-1 h100px text-form text-base outline-none"
+              className="border rounded-md w-full p-2.5 mt-1 h100px text-base outline-none"
               placeholder="Please add description to your campaign"
               name="campaignDescription"
             />
@@ -141,7 +143,7 @@ const NewCampaign: React.FC = () => {
 
           <div className="w-full flex justify-between items-center">
             <div className="w-[40%]">
-              <label className="text-help text-sm" htmlFor="startDate">
+              <label className="text-help text-sm font-medium" htmlFor="startDate">
                 Start Date <span className={`text-red`}>*</span> :
               </label>
               <br />
@@ -149,14 +151,14 @@ const NewCampaign: React.FC = () => {
                 type="text"
                 name="startDate"
                 placeholder="YYYY-MM-DD"
-                className="border rounded-md w-full p-2.5 mt-1 text-form text-base outline-none"
+                className="border rounded-md w-full p-2.5 mt-1 text-base outline-none"
                 value={newCampaignData.startDate}
                 onChange={handleChange}
               />
             </div>
 
             <div className="w-[40%]">
-              <label className="text-help text-sm" htmlFor="endDate">
+              <label className="text-help text-sm font-medium" htmlFor="endDate">
                 End Date <span className={`text-red`}>*</span> :
               </label>
               <br />
@@ -164,7 +166,7 @@ const NewCampaign: React.FC = () => {
                 type="text"
                 name="endDate"
                 placeholder="YYYY-MM-DD"
-                className="border rounded-md w-full p-2.5 mt-1 text-form text-base outline-none"
+                className="border rounded-md w-full p-2.5 mt-1 text-base outline-none"
                 value={newCampaignData.endDate}
                 onChange={handleChange}
               />
@@ -172,7 +174,7 @@ const NewCampaign: React.FC = () => {
           </div>
 
           <div className="w-full flex justify-between items-center border mt-4">
-            <p className="text-help text-sm">
+            <p className="text-help text-sm font-medium">
               Want to receive daily digest about the campaign?
             </p>
             <div
@@ -191,7 +193,7 @@ const NewCampaign: React.FC = () => {
           </div>
 
           <div className="w-full mb-2">
-            <label className="text-help text-sm" htmlFor="keywords">
+            <label className="text-help text-sm font-medium" htmlFor="keywords">
               Link Keywords <span className={`text-red`}>*</span> :
             </label>
             <br />
@@ -208,7 +210,7 @@ const NewCampaign: React.FC = () => {
           </div>
 
           <div className="w-[70%] mt-2.5">
-            <p className="text-help text-xs w-full mb-1">
+            <p className="text-help text-sm font-medium w-full mb-1">
               Kindly select how often you want to receive daily digest
             </p>
             <div className="p-1.5 w-[155px] border rounded">

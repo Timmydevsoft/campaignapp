@@ -17,4 +17,11 @@
   font-family: "Work Sans", sans-serif;
   font-optical-sizing: auto;
 }
+input{
+  color: #666666;
+}
+
+input::placeholder{
+  @apply placeholder-custom
+}
 
