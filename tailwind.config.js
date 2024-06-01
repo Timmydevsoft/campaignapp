@@ -20,9 +20,22 @@ export default {
         red: "#990000",
         form:"#999999"
 
+      },
+
+      placeHolderColor: {
+        "custom-gray": "#999999"
       }
     },
   },
-  plugins: [],
+  plugins: [
+    function({addUtilities}){
+      const newUtilities ={
+        '.placeholder-custom::placeholder':{
+          color: "#999999"
+        }
+      }
+      addUtilities(newUtilities)
+    }
+  ],
 }
 
