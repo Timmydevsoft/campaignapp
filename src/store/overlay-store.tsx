@@ -5,13 +5,15 @@ interface props{
     sucessPost: boolean,
     confirmDelete: boolean,
     successDelete: boolean,
+    update: boolean
 }
 
 const initialState:props ={
     successCreate: false,
     sucessPost: false,
     successDelete: false,
-    confirmDelete: false
+    confirmDelete: false,
+    update: false
 }
  const overlaySlice = createSlice({
     name:"overlay",
@@ -28,6 +30,9 @@ const initialState:props ={
         },
         renderConfirmDelete(state){
             state.confirmDelete = !state.confirmDelete
+        },
+        renderUpdate(state){
+            state.update = !state.update
         }
 
      }

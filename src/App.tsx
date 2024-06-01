@@ -12,6 +12,7 @@ import NewCampaignInfo from "./component/NewCampaignInfo";
 
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import UpdateSuccessful from "./component/UpdateSuccessful";
 
 export default function App() {
 
@@ -19,6 +20,7 @@ export default function App() {
   const successDelete = useSelector((state:any)=>state.overlay.successDelete)
   const confirmStop = useSelector((state:any)=>state.overlay.confirmDelete)
   const showCampaign = useSelector((state:any)=>state.formData.show)
+  const updateDisplay = useSelector((state:any)=>state.overlay.update)
 
   return (
     <div className={`flex w-full bg-bacground h-[100vh]`}> 
@@ -30,7 +32,7 @@ export default function App() {
 
      <div className="w-[79.6%] h-full flex flex-col">  
         <ContentHeader/>
-         <div className="px-[5%]">
+         <div className="px-[5%] h-full">
 
           <Routes>
             <Route path="/" element= {<Overview/>}/>
@@ -49,6 +51,10 @@ export default function App() {
 
           {
             successDelete? (<SuccessfulDelete/>): null
+          }
+
+          {
+            updateDisplay? (<UpdateSuccessful/>): null
           }
 
          </div>

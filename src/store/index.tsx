@@ -46,6 +46,18 @@ const campaignDataSlice = createSlice({
         },
         handleHide(state){
             state.show = !state.show
+        },
+        handleDirectDelete (state, action){
+            state.campaignName = action.payload.campaignName
+            state.startDate = action.payload.startDate
+            state.campaignStatus = action.payload.campaignStatus
+            state.dailyDigest = action.payload.dailyDigest
+            state.campaignDescription = action.payload.campaignDescription
+            state.endDate= action.payload.endDate 
+            state.digestCampaign = action.payload.digestCampaign
+            state.id = action.payload.id
+            state.linkedKeywords = action.payload.linkedKeywords
+            state.endDate = action.payload.endDate
         }
     }
 })

@@ -4,7 +4,7 @@ import add from "../images/material-symbols_add.png"
 import help from "../images/material-symbols_help-outline.png"
 import { sidenavItems } from "../constant"
 import { Link } from "react-router-dom"
-
+import "../index.css"
 
 const Sidebar:React.FC = ()=>{
     return(
@@ -12,14 +12,14 @@ const Sidebar:React.FC = ()=>{
             <header className="flex items-center gap-4 mb-4">
 
                 <img src={logo} alt="logo" />
-                <span className=" block text-[2rem] bg-gradient-to-r from-logobi to-logobii text-transparent bg-clip-text font-bold">Scrutz</span>
+                <span className="worksans block text-[2rem] bg-gradient-to-r from-logobi to-logobii text-transparent bg-clip-text font-bold">Scrutz</span>
 
             </header>
 
             <div className="management flex flex-col align-baseline mb-8">
                 <button className="bg-overview border-none rounded-sm py-2 flex px-4 -items-center gap-4 text-bacground text-sm mb-[1.25rem]">
                     <img src={add} alt="plus icon" />
-                    <Link to="/new-campaign">New campaign</Link>
+                    <Link className="text-sm font-semibold" to="/new-campaign">New campaign</Link>
                 </button>
 
                 <div className="flex flex-col items-baseline w-full">
@@ -28,7 +28,7 @@ const Sidebar:React.FC = ()=>{
                         
                             <button key={index} className="flex items-center gap-4 px-4 py-2 bg-none hover:bg-bacground borer-none rounded-sm">
                                 <img src={items.icon} alt="icon" />
-                                <Link to={items.link} className="text-[14px]">{items.name}</Link>
+                                <Link to={items.link} className="text-sm font-semibold">{items.name}</Link>
                             </button>
                         ))
                     }
@@ -43,10 +43,10 @@ const Sidebar:React.FC = ()=>{
                 <div className="flex-flex-col items-center">
 
                     <h2 className="text-base bg-gradient-to-r from-logobi to-logobii text-transparent bg-clip-text text-center"> Need help?</h2>
-                    <p className="text-help text-xs text-center">We’re readily available to provide help</p>
+                    <p className="text-help text-xs font-medium text-center">We’re readily available to provide help</p>
 
                 </div>
-                <a href="" className="block text-center mt-[1rem] rounded-md border text-logobi border-logobi px-2.5 py-2">Get help</a>
+                <a href="" className="block text-center text-xm font-semibold mt-[1rem] rounded-md border text-logobi border-logobi px-2.5 py-2">Get help</a>
             </div>
 
         </div>
