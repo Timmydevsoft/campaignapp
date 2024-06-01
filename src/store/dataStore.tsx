@@ -6,7 +6,7 @@ import overlaySlice from "./overlay-store";
 const formStore = configureStore({
     reducer:{
         formData: campaignDataSlice.reducer,
-        overlay: overlaySlice.reducer
+        overlay: overlaySlice.reducer,
     }
 })
 

@@ -1,11 +1,12 @@
 import React from "react";
 import X from "../images/iconoir_cancel.png";
 import arrowd from "../images/Vector (2).png";
-
+import axios from "axios";
 import back from "../images/Vector (7).png";
 import { useSelector, useDispatch } from "react-redux";
 import { formActions } from "../store";
 import { overlayActions } from "../store/overlay-store";
+import "../index.css"
 
 const NewCampaignInfo: React.FC = () => {
   // The data I wants for this palce starts here
@@ -101,6 +102,30 @@ const NewCampaignInfo: React.FC = () => {
     }));
   };
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log(campaignData)
+    try {
+        const FormatedData = {
+            id: Number(campaignData.id), // Ensure the ID is a number
+            campaignName: campaignData.campaignName,
+            campaignDescription: campaignData.campaignDescription,
+            startDate: new Date(campaignData.startDate).toISOString(),
+            endDate: new Date(campaignData.endDate).toISOString(), 
+            digestCampaign: campaignData.digestCampaign === "Yes", 
+            linkedKeywords: campaignData.linkedKeywords.map((keyword) => String(keyword)), // Ensure array of strings
+            dailyDigest: campaignData.dailyDigest,
+        }
+      const response = await axios.put(
+        `https://infinion-test-int-test.azurewebsites.net/api/campaign/${Number(campaignData.id)}`,FormatedData
+    
+      );
+      console.log(response.data);
+      dispatch(overlayActions.renderUpdate())
+    } catch (error) {
+      console.error("There was an error updating the campaign!", error);
+    }
+  };
   // end range fo the data
 
   return (
@@ -114,7 +139,7 @@ const NewCampaignInfo: React.FC = () => {
       </button>
 
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-[600] text-overview stacking-wide">
+        <h2 className="worksans text-lg font-[600] text-overview stacking-wide">
           Campaign Information
         </h2>
 
@@ -126,7 +151,7 @@ const NewCampaignInfo: React.FC = () => {
           <span className={`${campaignData.campaignStatus ==="Active"? 'text-[#009918]':'text-red'} text-base px-2`}>{campaignData.campaignStatus}</span>
         </div>
       </div>
-      <form action="">
+      <form onSubmit={handleSubmit}>
             <div className=" w-full mb-2">
                 <label className="text-help  text-sm" htmlFor="campaignname">
                 Campaign Name <span className={`text-red`}>*</span> :
@@ -318,17 +343,18 @@ const NewCampaignInfo: React.FC = () => {
                 )}
             </div>
 
-            <div className="w-[70%] flex items-center mt-[3rem] justify-between">
-                <button type="button" onClick={handleConfirm} className="py-2.5 px-14 bg-[#990000] w-[45%] text-base font-[600] cursor-pointer rounded-md text-[#FFFFFF]">
+            <div className="w-[100%] flex items-center gap-4 mt-[3rem] justify-between">
+                <button type="button" onClick={handleConfirm} className="py-2.5 px-14 bg-[#990000] w-[30%] text-base font-[600] cursor-pointer rounded-md text-[#FFFFFF]">
                 Stop Campaign
                 </button>
                 <button
                 type="button"
                 onClick={handleEdit}
-                className="py-2.5 px-14 bg-none w-[45%] text-base font-[600] cursor-pointe border border-overview text-overview rounded-md "
+                className="py-2.5 px-14 bg-none w-[30%] text-base font-semibold cursor-pointe border border-overview text-overview rounded-md "
                 >
                 Edit Information
                 </button>
+                <button type="submit" className="rounded-md border border-overview px-4 py-2 text-overview ">Update Campaign Change</button>
             </div>
       </form>
 
