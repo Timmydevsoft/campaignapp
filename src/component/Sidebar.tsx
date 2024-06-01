@@ -4,9 +4,19 @@ import add from "../images/material-symbols_add.png"
 import help from "../images/material-symbols_help-outline.png"
 import { sidenavItems } from "../constant"
 import { Link } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import "../index.css"
 
 const Sidebar:React.FC = ()=>{
+    
+    const location=useLocation()
+    const navigate=useNavigate()
+
+    const getClassName = (path: string)=>location.pathname === path? 'bg-bacground text-overview': 'bg-none text-[#455454]'
+    const handleNavigation = (path:string)=>{
+        navigate(path)
+    }
+
     return(
         <div className="container bg-sidebar w-full h-full py-4 pl-6 pr-2">
             <header className="flex items-center gap-4 mb-4">
@@ -26,9 +36,12 @@ const Sidebar:React.FC = ()=>{
                     {
                         sidenavItems.map((items,index)=>(
                         
-                            <button key={index} className="flex items-center gap-4 px-4 py-2 bg-none hover:bg-bacground borer-none rounded-sm">
-                                <img src={items.icon} alt="icon" />
-                                <Link to={items.link} className="text-sm font-semibold">{items.name}</Link>
+                            <button key={index} 
+                                className={`text-sm font-semibold ${getClassName(items.link)} flex items-center gap-4 px-4 py-2 bg-none hover:bg-bacground borer-none rounded-sm`}
+                                onClick={()=>handleNavigation(items.link)}
+                                >
+                                <img src={location.pathname ===items.link? items.icona : items.icon} alt="icon" className=" h-[20px]" />
+                                {items.name}
                             </button>
                         ))
                     }

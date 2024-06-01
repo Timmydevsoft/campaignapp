@@ -2,9 +2,14 @@ import overviewd from "../images/ri_dashboard-2-line.png"
 import campg from "../images/material-symbols_campaign-outline.png"
 import mktintelligentd from "../images/fluent-mdl2_insights.png"
 import settingd from "../images/ep_setting.png"
+import campb from "../images/campaignIncative.svg"
+import overa from "../images/dasha.svg"
+import light from "../images/light.svg"
+import sett from "../images/set.svg"
 interface propsType{
     name: string;
     icon: string;
+    icona: string;
     link: string
 }
 
@@ -12,23 +17,28 @@ export const sidenavItems: propsType[] = [
    {
     name: "Overview",
     link: "/",
-    icon: overviewd
+    icon: overa,
+    icona: overviewd
+
    },
 
    {
     name: "Campaign",
     link: '/campaign',
-    icon: campg
+     icon: campg,
+     icona: campb 
    },
    {
     name: "Marketing intelligence",
-    link: '/',
-    icon: mktintelligentd
+    link: '',
+    icon: light,
+    icona: mktintelligentd
    },
    {
     name: "Account Settings",
-    link: '/',
-    icon: settingd
+    link: '',
+    icon: settingd,
+    icona: sett
    }
 
 ]
