@@ -120,6 +120,7 @@ const NewCampaign: React.FC = () => {
             <input
               type="text"
               name="campaignName"
+              required
               placeholder="eg. The future is now"
               className="border rounded-md w-full p-2 mt-1 text-base outline-none"
               value={newCampaignData.campaignName}
@@ -149,6 +150,7 @@ const NewCampaign: React.FC = () => {
               <br />
               <input
                 type="text"
+                required
                 name="startDate"
                 placeholder="YYYY-MM-DD"
                 className="border rounded-md w-full p-2.5 mt-1 text-base outline-none"
@@ -159,7 +161,7 @@ const NewCampaign: React.FC = () => {
 
             <div className="w-[40%]">
               <label className="text-help text-sm font-medium" htmlFor="endDate">
-                End Date <span className={`text-red`}>*</span> :
+                End Date :
               </label>
               <br />
               <input
@@ -200,6 +202,7 @@ const NewCampaign: React.FC = () => {
             <div className="w-full p-2 h-[70px] border rounded-md">
               <input
                 type="text"
+                required
                 placeholder="To add keywords, type your keyword and press enter"
                 className="border-none rounded-md w-[50%] p-1 text-form text-base outline-none"
                 value={keyword}
